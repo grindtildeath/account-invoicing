@@ -15,7 +15,7 @@ def compute_discount(env):
             ("discount3", "!=", 0),
         ]
     )
-    env["account.move.line"]._compute_discount()
+    env["account.move.line"].filtered(lambda l:  l.date > l.company_id.fiscalyear_lock_date)._compute_discount()
 
 
 @openupgrade.migrate()
